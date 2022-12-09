@@ -51,5 +51,23 @@ namespace ContactsApp
 
             Close();
         }
+
+        private void nameTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            nameTextBox.Text = "";
+            nameTextBox.Foreground = Brushes.Black;
+        }
+
+        private void emailTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            emailTextBox.Text = "";
+            emailTextBox.Foreground = Brushes.Black;
+        }
+
+        private void phoneTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            phoneTextBox.Text = "";
+            phoneTextBox.Foreground = Brushes.Black;
+        }
     }
 }

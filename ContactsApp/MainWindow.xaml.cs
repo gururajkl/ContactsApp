@@ -51,13 +51,40 @@ namespace ContactsApp
             {
                 contactsLV.ItemsSource = contacts;
             }
+
+            if (contacts.Count > 0)
+            {
+                totalContacts.Content = $"Total contacts in your directory is {contacts.Count}";
+            }
+            else totalContacts.Content = $"Total contacts in your directory is 0";
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox? textBox = sender as TextBox;
-            var filteredContacts = contacts.Where(c => c.Name.ToLower().Contains(textBox.Text.ToLower())).ToList();
-            contactsLV.ItemsSource = filteredContacts;
+            if (contacts != null)
+            {
+                var filteredContacts = contacts.Where(c => c.Name.ToLower().Contains(textBox.Text.ToLower())).ToList();
+                contactsLV.ItemsSource = filteredContacts;
+            }
+        }
+
+        private void contactsLV_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Contact selectedContact = (Contact)contactsLV.SelectedItem;
+
+            if(selectedContact != null)
+            {
+                ContactsDetailsWindow contactsDetailsWindow = new ContactsDetailsWindow(selectedContact);
+                contactsDetailsWindow.ShowDialog();
+                ReadDataBase();
+            }
+        }
+
+        private void TextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            tbSearch.Text = "";
+            tbSearch.Foreground = Brushes.Black;
         }
     }
 }

@@ -5,7 +5,13 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <PackageIcon></PackageIcon>
+    <ApplicationIcon>kontact_contacts.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="kontact_contacts.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
