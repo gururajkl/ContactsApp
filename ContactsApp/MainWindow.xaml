@@ -10,6 +10,11 @@
         <Button 
             Content="New Contact"
             Click="Button_Click"/>
+        <TextBox 
+            Padding="5"
+            Margin="0, 5, 0, 5"
+            TextChanged="TextBox_TextChanged">
+        </TextBox>
         <ListView 
             Height="300"
             x:Name="contactsLV"

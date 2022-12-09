@@ -23,9 +23,11 @@ namespace ContactsApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Contact> contacts;
         public MainWindow()
         {
             InitializeComponent();
+            contacts = new List<Contact>();
             ReadDataBase();
         }
 
@@ -38,19 +40,24 @@ namespace ContactsApp
 
         void ReadDataBase()
         {
-            List<Contact> contacts;
-
             using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
             {
                 connection.CreateTable<Contact>();
                 // Similar to Select SQL stmt 
-                contacts = connection.Table<Contact>().ToList();
+                contacts = connection.Table<Contact>().ToList().OrderBy(c => c.Name).ToList();
             }
 
             if(contacts != null)
             {
                 contactsLV.ItemsSource = contacts;
             }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox? textBox = sender as TextBox;
+            var filteredContacts = contacts.Where(c => c.Name.ToLower().Contains(textBox.Text.ToLower())).ToList();
+            contactsLV.ItemsSource = filteredContacts;
         }
     }
 }
